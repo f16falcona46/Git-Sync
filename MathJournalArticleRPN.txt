@@ -1,0 +1,60 @@
+	What are mathematical expressions?
+A mathematical expression can be expressed (ha) as a tree. For example, the
+expression 1+2*(3-4) can be expressed this way:
++
+|\
+1 *
+  |\
+  2 -
+    |\
+    3 4
+
+Each node in the tree is either an operation or a number, and all leaves of the
+tree are numbers. Note that an equation can also be expressed this way, and so
+can a program.
+
+	Ways of writing mathematical expressions
+The typical way we express mathematical expressions is called "infix". That is,
+the operator goes between its operands. However, there are some exceptions like
+the square root, unary negation, etc. Note that the tree does not inherently
+impose a representation on its users. Infix notation is simply an artifact of
+how we traverse the tree. We can traverse the tree in a different manner and
+therefore write our mathematical expressions differently.
+
+	Polish Notation
+One of the first major "alternative" ways of writing mathematical expressions is
+one invented by a Polish man, Jan Lukasiewicz, and the notation is sometimes
+called after his last name, but is mostly called either prefix notation or
+Polish notation. It puts the operators before their operands. So, the example
+used at the beginning, 1+2*(3-4) could be expressed this way: + 1 * 2 - 3 4. Any
+expression where the arity (number of arguments) each operator takes can be
+expressed this way. It is also somewhat easier to parse for a computer.
+
+	REVERSE Polish Notation
+Reverse Polish Notation was probably something of an expedient, needed in order
+to implement scientific calculators with the technology of the day. In RPN, the
+arguments are entered first, then the operators. So, the example above would be
+entered like this: 1 2 3 4 - * +. With this method, a computer has no need of
+keeping track of operations, making it extremely easy for a computer to parse.
+This helped in the first calculators, since they did not have enough memory to
+store both pending numbers and pending calculations simultaneously. However,
+many people very much like RPN, even today when calculator memories are vastly
+larger than computer memories of those early days.
+
+	Other applications of PN and RPN
+One famous application of a prefix-notation system is in Lisp. Lisp's language
+does not look familiar to imperative languages like C. For example, a program to
+sum all the numbers from 1 to 10:
+
+C99:
+int result = 0;
+for (int i = 1; i <= 10; ++i) result += i;
+
+Scheme (a dialect of Lisp), can be done in multiple ways:
+Using recursion:
+(define sum (lambda (n total) (if (> n 10) total (sum (+ n 1) (+ total n)))))
+(sum 0 0)
+
+Note that in Lisp, every function is the first element in the parentheses-
+enclosed list. An application of RPN is in RPL (and indeed, in most stack-based
+languages). In RPL, data of multiple types can be pushed onto a stack, and 
