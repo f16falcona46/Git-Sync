@@ -85,3 +85,17 @@ The larger exponent is picked to be the exponent of the final binary number. If
 the addition of the mantissas has a carry in the last place, then another 1 has
 to be added to the exponent. Finally, the sign bit is the sign bit of the larger
 of the two floating point numbers.
+
+	Operations with Floating Point Numbers: Subtracting
+Almost identical to adding, but the number being subtracted has its sign bit
+flipped.
+
+	Operations with Floating Point Numbers: Multiplying
+Multiplying is a bit more difficult. First, the exponents must be turned into
+their original form. For example, an exponent encoded as 131 must have 127
+subtracted from it to become its original value of 4. Next, the exponents of
+each number are added together. After that, a "1" is prepended to each of the
+two mantissas, and they are multiplied in the binary manner. Any method is fine,
+including long multiplication. After that, convert the result to a floating
+point number using the previously described method, subtract 46 from the
+exponent, and add the previously computed sum of exponents to the ecponent.
