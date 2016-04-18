@@ -1,5 +1,8 @@
 Floating point numerals:
 
+
+	What are floating point numbers?
+
 Many people are aware of binary numerals, such as 1001 in binary representing
 the number 9 in decimal. However, integers are not the only thing that binary
 can represent. Binary can also represent rational numbers. "Floating point" is
@@ -10,6 +13,8 @@ are in binary.
 One common type of floating point representation is known as "IEEE 754". These
 will be used here. However, not all of the standard will be discussed, as it
 also describes a lot of edge cases.
+
+	The Single Precision Floating Point Number
 
 One type described by the standard is a 32-bit wide floating point type, encoded
 in binary (as opposed to BCD, binary coded decimal). This type is often referred
@@ -36,3 +41,23 @@ encoding. So, the mantissa would be encoded as follows:
 
 The third thing to be careful of is the sign bit. A zero sign bit means the
 number is positive, and a one as a sign bit means the number is negative.
+
+	Converting to a Floating Point Number
+
+That seems all well and good, but how does one convert to a floating point
+number? Well, if the number is already in binary, then it is easy enough. All
+one has to do is find the position of the most significant "1" digit, and set
+the exponent to that +127 (we will use 0-indexing in this article, so "1" has
+a "1" bit in the 0th place). Then, set the mantissa to all the bits remaining to
+the right of that "1" bit. If there are too many bits to fit, round to evens,
+and if there are too few, then set the remaining mantissa bits to zero. Then all
+that is left is to set the sign bit. However, it is somewhat more difficult with
+decimal. One can divide or multiply repeatedly by 2, keeping track of the number
+of times he does so, until the number obtained is within [1,2). Then, he can add
+the number of times he divided (or subtracting the number of times he multipled)
+from 127 to obtain the exponent. With the remaining binary decimal, one can once
+again apply the previously described method to get the mantissa of the binary
+floating point number. The sign bit is the last part.
+
+	Operations with Floating Point Numbers: Adding
+
