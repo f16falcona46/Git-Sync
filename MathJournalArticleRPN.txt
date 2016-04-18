@@ -57,4 +57,12 @@ Using recursion:
 
 Note that in Lisp, every function is the first element in the parentheses-
 enclosed list. An application of RPN is in RPL (and indeed, in most stack-based
-languages). In RPL, data of multiple types can be pushed onto a stack, and 
+languages). In RPL, data of multiple types can be pushed onto a stack, and then
+commands can be executed. Following the example above of summing from 1 to 10:
+
+\<< 0 1 10 FOR I I + NEXT \>>
+
+It pushes 0 to the stack, then pushes each number from 1 to 10 and adds it to
+the number already on the stack. This will leave the result, 55 on the stack
+after it finishes. Also, user actions operate on the same stack as programs, so
+programs in stack-based languages can be thought of as very complex macros.
