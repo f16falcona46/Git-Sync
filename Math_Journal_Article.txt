@@ -51,13 +51,29 @@ the exponent to that +127 (we will use 0-indexing in this article, so "1" has
 a "1" bit in the 0th place). Then, set the mantissa to all the bits remaining to
 the right of that "1" bit. If there are too many bits to fit, round to evens,
 and if there are too few, then set the remaining mantissa bits to zero. Then all
-that is left is to set the sign bit. However, it is somewhat more difficult with
-decimal. One can divide or multiply repeatedly by 2, keeping track of the number
-of times he does so, until the number obtained is within [1,2). Then, he can add
-the number of times he divided (or subtracting the number of times he multipled)
-from 127 to obtain the exponent. With the remaining binary decimal, one can once
-again apply the previously described method to get the mantissa of the binary
-floating point number. The sign bit is the last part.
+that is left is to set the sign bit.
+
+However, it is somewhat more difficult with decimal. One can divide or multiply
+repeatedly by 2, keeping track of the number of times he does so, until the
+number obtained is within [1,2). Then, he can add the number of times he divided
+(or subtracting the number of times he multipled) from 127 to obtain the
+exponent. With the remaining binary decimal, one can once again apply the
+previously described method to get the mantissa of the binary floating point
+number. The sign bit is the last part.
+
+Another way is to first comvert the decimal number to binary, and apply the
+method for converting binary numbers into floating point numbers.
+
+Let's try an example, the number 5. This number is 101 in binary. First, we find
+the position of the leftmost "1". That's 2. So, the exponent is 129 (127+2), or
+10000001 in binary. Next, we throw that leftmost 1 away, leaving us with 01. We
+put those in the mantissa, giving us 01 as the leftmost bits of the mantissa,
+and then leave the rest of the bits as 0s (obtaining 01000000000000000000000).
+Finally, we set the sign bit to zero, as the number 5 is positive. In the end,
+we obtain the floating point number 01000000101000000000000000000000.
+
 
 	Operations with Floating Point Numbers: Adding
-
+Adding two floating point numbers is, compared to multiplication, relatively
+easy. The first thing to to is to prepend a "1" to the beginning of the two
+mantissas, 
