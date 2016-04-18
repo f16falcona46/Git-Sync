@@ -1,0 +1,38 @@
+Floating point numerals:
+
+Many people are aware of binary numerals, such as 1001 in binary representing
+the number 9 in decimal. However, integers are not the only thing that binary
+can represent. Binary can also represent rational numbers. "Floating point" is
+typically used by computers to implement these rational numbers. They consist of
+a mantissa and an exponent, very similar to scientific notation. However, these
+are in binary.
+
+One common type of floating point representation is known as "IEEE 754". These
+will be used here. However, not all of the standard will be discussed, as it
+also describes a lot of edge cases.
+
+One type described by the standard is a 32-bit wide floating point type, encoded
+in binary (as opposed to BCD, binary coded decimal). This type is often referred
+to as a "single precision floating point number", or simply the "float" (e.g.,
+in C and languages derived from it). The 32 bits of its width comprise 1 sign
+bit, which determines whether the number is positive or negative, 8 exponent
+bits, which determine the power of 2 the number is multiplied by, and 23
+mantissa (or "fraction") bits. They are arranged like this:
+
+ X XXXXXXXX XXXXXXXXXXXXXXXXXXXXXXX
+ S Exponent Mantissa
+("S" for sign)
+
+There are three things to be careful of. First, the exponent is shifted by 127.
+That is, to express the number 1, which is 2^0, the exponent encoded is not 0,
+but 127. Similarly, the number 2, which is 2^1, has an encoded exponent of 128.
+
+The second thing to be careful of is the fact that the mantissa does not include
+the leading 1. That is, to describe the number 3 (base 10), which is
+1.1*(10)^(10) in binary, the leading 1 in 1.1 would be omitted. Also, the most
+significant bit of the mantissa is the most significantly placed bit for its
+encoding. So, the mantissa would be encoded as follows:
+ 10000000000000000000000
+
+The third thing to be careful of is the sign bit. A zero sign bit means the
+number is positive, and a one as a sign bit means the number is negative.
